@@ -3,7 +3,8 @@
     require_once '../config.php';
 
     if(isset($_POST['go'])) {
-        $sexe = htmlspecialchars($_POST['sexe']);
+        var_dump($_POST['sexe']);
+        $sexe = htmlspecialchars(implode($_POST['sexe']));
         $nom = htmlspecialchars($_POST['nom']);
         $prenom = htmlspecialchars($_POST['prenom']);
         $date_naissance = htmlspecialchars($_POST['date_naissance']);
@@ -26,11 +27,9 @@
             exit("Votre adresse email n'est pas valide !");
         }
 
-        $req_mail =
-            // on prepare la requete pour obtenir tous les utilisateurs dont l'email correspond à ceux de la bdd
-            $pdo -> prepare("SELECT * FROM users WHERE email=?");
+        $req_mail = $pdo->prepare("SELECT * FROM users WHERE email=?");
         $req_mail -> execute(array($email));
-        $exist_mail = $req_mail -> rowCount(); // #rowCount() combien d'informations avec cet email existe
+        $exist_mail = $req_mail->rowCount(); // #rowCount() combien d'informations avec cet email existe
 
         if($exist_mail != 0) {
             exit("Cette adresse email est déjà utilisée !");
@@ -39,13 +38,10 @@
         if($mdp != $confirm_mdp) {
             exit("Vos mots de passe ne correspondent pas !");
         }
+        $insert_user = $pdo->prepare("INSERT INTO users (sexe, nom, prenom, date_naissance, pseudo, email, mot_de_passe) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $insert_user->execute(array($sexe, $nom, $prenom, $date_naissance, $pseudo, $email, $mdp));
 
-        foreach($sexe as $s) {
-            $insert_user = $pdo -> prepare("INSERT INTO users (sexe, nom, prenom, date_de_naissance, pseudo, email, mot_de_passe) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $insert_user -> execute(array($s, $nom, $prenom, $date_naissance, $pseudo, $email, $mdp));
-
-            $_SESSION['compte_cree'] = "Votre compte a bien été créé !";
-            header('Location: accueil.php');
-        }
+        $_SESSION['compte_cree'] = "Votre compte a bien été créé !";
+        header('Location: accueil.php');
     }
 ?>
