@@ -10,22 +10,36 @@
         <div class="boite-connexion">
             <h2>Se connecter</h2>
 
-            <form action="s.php" method="post">
+            <form action="connexion_traitement.php" method="post">
                 <span class="champ">
                     <label for="email">Email</label>
-                    <input type="text" name="email"/>
-                </span>
-                <span class="champ">
-                    <label for="mdp">Mot de passe</label>
                     <label><?php switch (isset($_GET["erreur"])){
-                            case "mdp" :
-                                echo "<br>Mot de Passe Incorrecte !<br>";
+                            case "emptyemail" :
+                                echo "<br>Aucune adresse mail n'a été fournie !<br>";
+                                break;
+                            case "existemail" :
+                                echo "<br>L'adresse mail est déjà utiliser !<br>";
+                                break;
+                            case "email" :
+                                echo "<br>L'adresse mail est invalide !<br>";
                                 break;
                             default:
                                 echo "";
                                 break;
                         } ?></label>
-                    <input type="password" name="mdp"/>
+                    <input type="text" name="email"/>
+                </span>
+                <span class="champ">
+                    <label for="mot_de_passe">Mot de passe</label>
+                    <label><?php switch (isset($_GET["erreur"])){
+                            case "mdp" :
+                                echo "<br>Mot de Passe incorrecte !<br>";
+                                break;
+                            default:
+                                echo "";
+                                break;
+                        } ?></label>
+                    <input type="password" name="mot_de_passe"/>
                 </span>
 
                 <span class="action">

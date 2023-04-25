@@ -38,6 +38,9 @@
                             case "existemail" :
                                 echo "<br>L'adresse mail est déjà utiliser !<br>";
                                 break;
+                            case "email" :
+                                echo "<br>L'adresse mail est invalide !<br>";
+                                break;
                             default:
                                 echo "";
                                 break;
