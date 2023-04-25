@@ -37,8 +37,6 @@
             die();
         }
 
-
-
         $insert_user = $pdo->prepare("INSERT INTO users (pseudo, email, mot_de_passe) VALUES (?, ?, ?)");
         $insert_user->execute(array($pseudo, $email, $mdp));
 

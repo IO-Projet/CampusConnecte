@@ -11,9 +11,7 @@
             <h2>S'inscrire</h2>
             <form action="inscription_traitement.php" method="post">
                 <span class="champ">
-
                     <label><?php if(isset($_GET["erreur"])) echo "error : ".$_GET["erreur"]."<br><br>"; ?></label>
-
                     <label for="pseudo">Pseudo</label>
                     <label><?php switch (isset($_GET["erreur"])){
                             case "pseudo" :
@@ -25,7 +23,7 @@
                             default:
                                 echo "";
                                 break;
-                        } ?></label>
+                    } ?></label>
                     <input type="text" name="pseudo" size="20" value="<?php if(isset($pseudo)) echo $pseudo; ?>"/>
                 </span>
                 <br>
@@ -57,11 +55,11 @@
                             default:
                                 echo "";
                                 break;
-                        } ?></label>
+                    } ?></label>
                     <input type="password" name="mot_de_passe" size="20"/>
                 </span>
                 <br>
-                <input type="submit" value="Valider" name="go">
+                <input type="submit" value="Valider" name="go"/>
 
                 <p>Déjà inscrit? <a href="connexion.php">Se connecter</a></p>
             </form>

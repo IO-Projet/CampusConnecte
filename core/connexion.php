@@ -9,9 +9,9 @@
     <body>
         <div class="boite-connexion">
             <h2>Se connecter</h2>
-
             <form action="connexion_traitement.php" method="post">
                 <span class="champ">
+                    <label><?php if(isset($_GET["erreur"])) echo "error : ".$_GET["erreur"]."<br><br>"; ?></label>
                     <label for="email">Email</label>
                     <label><?php switch (isset($_GET["erreur"])){
                             case "emptyemail" :
@@ -26,9 +26,10 @@
                             default:
                                 echo "";
                                 break;
-                        } ?></label>
+                    } ?></label>
                     <input type="text" name="email"/>
                 </span>
+                <br>
                 <span class="champ">
                     <label for="mot_de_passe">Mot de passe</label>
                     <label><?php switch (isset($_GET["erreur"])){
@@ -38,13 +39,11 @@
                             default:
                                 echo "";
                                 break;
-                        } ?></label>
-                    <input type="password" name="mot_de_passe"/>
+                    } ?></label>
+                    <input type="password" name="mot_de_passe" size="20"/>
                 </span>
-
-                <span class="action">
-                    <input type="submit" value="Valider"/>
-                </span>
+                <br>
+                <input type="submit" value="Valider" name="go"/>
 
                 <p>Pas encore inscrit? <a href="inscription.php">S'inscrire</a></p>
             </form>
