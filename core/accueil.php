@@ -7,7 +7,12 @@
     </head>
 
     <body>
-        <div class="connection">
+        <div class="connexion">
+            <form action="connexion.php">
+                <input type="submit" value="Connexion" name="account">
+            </form>
+        </div>
+        <div class="inscription">
             <form action="inscription.php">
                 <input type="submit" value="S'inscrire" name="new_account">
             </form>

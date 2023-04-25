@@ -9,48 +9,56 @@
     <body>
         <div class="boite-inscription">
             <h2>S'inscrire</h2>
-
             <form action="inscription_traitement.php" method="post">
                 <span class="champ">
-                    <input type="radio" name="sexe[]" value="M" required/>
-                    <label for="sexeM">M</label>
-                    <input type="radio" name="sexe[]" value="F" required/>
-                    <label for="sexeF">F</label>
-                    <input type="radio" name="sexe[]" value="NB" required/>
-                    <label for="sexeNB">NB</label>
-                </span>
-                <span class="champ">
-                    <label for="nom">Nom</label>
-                    <input type="text" placeholder="ex: NOM" name="nom" size="20" value="<?php if(isset($nom)) echo $nom; ?>" required/>
-                </span>
-                <span class="champ">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" placeholder="ex: Prénom" name="prenom" size="20" value="<?php if(isset($prenom)) echo $prenom; ?>" required/>
-                </span>
-                <span class="champ">
-                    <label for="date_naissance">Date de naissance</label>
-                    <input type="datetime-local" name="date_naissance" size="30" value="<?php if(isset($date_naissance)) echo $date_naissance; ?>" required/>
+
+                    <label><?php if(isset($_GET["erreur"])) echo "error : ".$_GET["erreur"]."<br><br>"; ?></label>
+
+                    <label for="pseudo">Pseudo</label>
+                    <label><?php switch (isset($_GET["erreur"])){
+                            case "pseudo" :
+                                echo "<br>Aucun Pseudonyme n'a été fournie !<br>";
+                                break;
+                            case "pseudomax" :
+                                echo "<br>Le Pseudo dépasse les 30 caractères !<br>";
+                                break;
+                            default:
+                                echo "";
+                                break;
+                        } ?></label>
+                    <input type="text" name="pseudo" size="20" value="<?php if(isset($pseudo)) echo $pseudo; ?>"/>
                 </span>
                 <br>
                 <span class="champ">
-                    <label for="pseudo">Pseudo</label>
-                    <input type="text" name="pseudo" size="20" value="<?php if(isset($pseudo)) echo $pseudo; ?>" required/>
-                </span>
-                <span class="champ">
                     <label for="email">Email</label>
-                    <input type="text" name="email" size="30" value="<?php if(isset($email)) echo $email; ?>" required/>
+                    <label><?php switch (isset($_GET["erreur"])){
+                            case "emptyemail" :
+                                echo "<br>Aucune adresse mail n'a été fournie !<br>";
+                                break;
+                            case "existemail" :
+                                echo "<br>L'adresse mail est déjà utiliser !<br>";
+                                break;
+                            default:
+                                echo "";
+                                break;
+                    } ?></label>
+                    <input type="text" name="email" size="30" value="<?php if(isset($email)) echo $email; ?>"/>
                 </span>
+                <br>
                 <span class="champ">
                     <label for="mot_de_passe">Mot de passe</label>
-                    <input type="password" name="mot_de_passe" size="20" required/>
+                    <label><?php switch (isset($_GET["erreur"])){
+                            case "emptymdp" :
+                                echo "<br>Le mot de passe est invalide !<br>";
+                                break;
+                            default:
+                                echo "";
+                                break;
+                        } ?></label>
+                    <input type="password" name="mot_de_passe" size="20"/>
                 </span>
-                <span class="champ">
-                    <label for="confirm_mot_de_passe">Confirmation du mot de passe</label>
-                    <input type="password" name="confirm_mot_de_passe" size="20" required/>
-                </span>
-
+                <br>
                 <input type="submit" value="Valider" name="go">
-                <input type="reset" value="Effacer">
 
                 <p>Déjà inscrit? <a href="connexion.php">Se connecter</a></p>
             </form>
