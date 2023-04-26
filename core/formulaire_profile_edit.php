@@ -32,7 +32,7 @@
         // Vérification du mot de passe actuel
         if ($new_password) {
             if ($password) {
-                $stmt = $dbh->prepare("SELECT password FROM users WHERE id = :user_id");
+                $stmt = $pdo->prepare("SELECT password FROM users WHERE id = :user_id");
                 $stmt->bindParam(':user_id', $user_id);
                 $stmt->execute();
                 if ($password != $stmt->fetchColumn()) {
@@ -50,7 +50,7 @@
 
         // Vérification du pseudo
         if ($pseudo) {
-            $stmt = $dbh->prepare("SELECT COUNT(*) FROM users WHERE pseudo = :pseudo AND id != :user_id");
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE pseudo = :pseudo AND id != :user_id");
             $stmt->bindParam(':pseudo', $pseudo);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
@@ -67,7 +67,7 @@
                 $query .= ", password = :password";
             }
             $query .= " WHERE id = :user_id";
-            $stmt = $dbh->prepare($query);
+            $stmt = $pdo->prepare($query);
             if ($new_password) {
                 $stmt->bindParam(':password', $new_password);
             }

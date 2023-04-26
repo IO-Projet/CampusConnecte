@@ -5,6 +5,7 @@
 
     // Récupération des données du formulaire
     $pseudo = strtolower($_POST['pseudo']);
+    $date = '0000-00-00'; // obliger de définir la une date par defaut sinon égale à NULL
     $email = strtolower($_POST['email']);
     $password = strtolower($_POST['password']);
 
@@ -17,8 +18,8 @@
         exit;
     }
 
-    // Vérification si l'adresse e-mail existe déjà dans la base de données
-    $stmt = $dbh->prepare("SELECT * FROM users WHERE email = :email OR pseudo = :pseudo");
+    // Vérification si l'adresse e-mail et le pseudo existent déjà dans la base de données
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email OR pseudo = :pseudo");
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->execute();
@@ -41,7 +42,9 @@
     }
 
     // Insertion des données dans la base de données
-    $stmt = $dbh->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+    $stmt = $pdo->prepare("INSERT INTO users (pseudo, date, email, password) VALUES (:pseudo, :date, :email, :password)");
+    $stmt->bindParam(':pseudo', $pseudo);
+    $stmt->bindParam(':date', $date);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $password);
     $stmt->execute();

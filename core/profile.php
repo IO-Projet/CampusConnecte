@@ -14,7 +14,7 @@
         if (isset($_GET['pseudo'])) {
             $pseudo = $_GET['pseudo'];
             // Récupération des informations de profil de l'utilisateur
-            $stmt = $dbh->prepare("SELECT * FROM users WHERE pseudo = :pseudo");
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE pseudo = :pseudo");
             $stmt->bindParam(':pseudo', $pseudo);
             $stmt->execute();
             $user = $stmt->fetch();
@@ -39,7 +39,7 @@
             $user_id = $_SESSION['user_id'];
     
             // Récupération des informations de profil de l'utilisateur
-            $stmt = $dbh->prepare("SELECT * FROM users WHERE id = :user_id");
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :user_id");
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
             $user = $stmt->fetch();

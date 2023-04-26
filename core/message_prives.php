@@ -11,7 +11,7 @@
         // Traitement de la recherche d'un utilisateur
         if (isset($_GET['search'])) {
             $search = $_GET['search'];
-            $stmt = $dbh->prepare("SELECT * FROM users WHERE pseudo = ?");
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE pseudo = ?");
             $stmt->execute([$search]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -28,7 +28,7 @@
         // Traitement de la suppression d'un message
         if (isset($_GET['delete'])) {
             $message_id = $_GET['delete'];
-            $stmt = $dbh->prepare("DELETE FROM message_prives WHERE id = ? AND user_push = ?");
+            $stmt = $pdo->prepare("DELETE FROM message_prives WHERE id = ? AND user_push = ?");
             $stmt->execute([$message_id, $_SESSION['user_id']]);
         }
 
@@ -39,12 +39,12 @@
             $user_push = $_SESSION['user_id'];
 
             // Récupération de l'ID de l'utilisateur destinataire à partir de son pseudo
-            $stmt = $dbh->prepare("SELECT id FROM users WHERE pseudo = ?");
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE pseudo = ?");
             $stmt->execute([$pseudo]);
             $user_pull = $stmt->fetchColumn();
 
             if ($user_pull && strlen($message) <= 2000) {
-                $stmt = $dbh->prepare("INSERT INTO message_prives (user_push, user_pull, message, date) VALUES (?, ?, ?, NOW())");
+                $stmt = $pdo->prepare("INSERT INTO message_prives (user_push, user_pull, message, date) VALUES (?, ?, ?, NOW())");
                 $stmt->execute([$user_push, $user_pull, $message]);
             }
 
@@ -53,7 +53,7 @@
         }
 
         // Récupération de la liste des utilisateurs avec lesquels l'utilisateur connecté a déjà eu une conversation à partir de la base de données
-        $stmt = $dbh->prepare("SELECT DISTINCT users.* FROM users JOIN message_prives ON (users.id = message_prives.user_push OR users.id = message_prives.user_pull) WHERE (message_prives.user_push = ? OR message_prives.user_pull = ?) AND users.id != ?");
+        $stmt = $pdo->prepare("SELECT DISTINCT users.* FROM users JOIN message_prives ON (users.id = message_prives.user_push OR users.id = message_prives.user_pull) WHERE (message_prives.user_push = ? OR message_prives.user_pull = ?) AND users.id != ?");
         $stmt->execute([$_SESSION['user_id'], $_SESSION['user_id'], $_SESSION['user_id']]);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -61,13 +61,13 @@
         if (isset($_GET['pseudo'])) {
             $pseudo = $_GET['pseudo'];
             // Récupération de l'ID de l'utilisateur destinataire à partir de son pseudo
-            $stmt = $dbh->prepare("SELECT id FROM users WHERE pseudo = ?");
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE pseudo = ?");
             $stmt->execute([$pseudo]);
             $selected_user = $stmt->fetchColumn();
 
             if ($selected_user) {
                 // Récupération des messages entre les deux utilisateurs
-                $stmt = $dbh->prepare("SELECT message_prives.*, users.pseudo FROM message_prives JOIN users ON message_prives.user_push = users.id WHERE (user_push = ? AND user_pull = ?) OR (user_push = ? AND user_pull = ?) ORDER BY message_prives.date ASC");
+                $stmt = $pdo->prepare("SELECT message_prives.*, users.pseudo FROM message_prives JOIN users ON message_prives.user_push = users.id WHERE (user_push = ? AND user_pull = ?) OR (user_push = ? AND user_pull = ?) ORDER BY message_prives.date ASC");
                 $stmt->execute([$_SESSION['user_id'], $selected_user, $selected_user, $_SESSION['user_id']]);
                 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } else {

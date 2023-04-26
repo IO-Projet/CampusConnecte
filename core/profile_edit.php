@@ -27,7 +27,7 @@
         $user_id = $_SESSION['user_id'];
 
         // Récupération des informations de profil de l'utilisateur
-        $stmt = $dbh->prepare("SELECT * FROM users WHERE id = :user_id");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :user_id");
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
         $user = $stmt->fetch();
@@ -44,7 +44,7 @@
 
     <body>
         <h1>Modifier le profil</h1>
-        <form action="formulaires/formulaire_profile_edit.php" method="post">
+        <form action="formulaire_profile_edit.php" method="post">
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" value="<?php echo $nom ?>" maxlength="20"><br>
 
