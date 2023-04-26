@@ -8,6 +8,18 @@
             header('Location: connexion.php');
             exit;
         }
+
+        // Récupération de l'ID de l'utilisateur connecté
+        $user_id = $_SESSION['user_id'];
+
+        // Récupération des informations de profil de l'utilisateur
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :user_id");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $user = $stmt->fetch();
+
+        // Récupération des informations de profil de l'utilisateur
+        $pseudo = htmlspecialchars($user['pseudo']);
     
         $show_edit_button = false;
     
@@ -51,8 +63,8 @@
         // Récupération des informations de profil de l'utilisateur
         $nom = isset($user['nom']) ? htmlspecialchars($user['nom']) == "" ? 'N.A.' : ucfirst(htmlspecialchars($user['nom'])) : 'N.A.';
         $prenom = isset($user['prenom']) ? htmlspecialchars($user['prenom']) == "" ? 'N.A.' : ucfirst(htmlspecialchars($user['prenom'])) : 'N.A.';
-        $pseudo = isset($user['pseudo']) ? htmlspecialchars($user['pseudo']) : "";
-        if ($user['date'] == '0000-00-00') {
+        $pseudo = htmlspecialchars($user['pseudo']);
+        if ($user['date'] == '0000-00-00' || $user['date'] == NULL) {
             $date_de_naissance = 'N.A.';
         } else {
             $date = date_create($user['date']);
@@ -74,7 +86,7 @@
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil</a></li>
+            <li><a href="profile.php">Profil - <?php echo $pseudo ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
             <li><a href="tableau_aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>

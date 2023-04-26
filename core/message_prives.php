@@ -8,6 +8,18 @@
             exit;
         }
 
+        // Récupération de l'ID de l'utilisateur connecté
+        $user_id = $_SESSION['user_id'];
+
+        // Récupération des informations de profil de l'utilisateur
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :user_id");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $user = $stmt->fetch();
+
+        // Récupération des informations de profil de l'utilisateur
+        $pseudo = htmlspecialchars($user['pseudo']);
+
         // Traitement de la recherche d'un utilisateur
         if (isset($_GET['search'])) {
             $search = $_GET['search'];
@@ -87,7 +99,7 @@
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil</a></li>
+            <li><a href="profile.php">Profil - <?php echo $pseudo ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
             <li><a href="tableau_aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
