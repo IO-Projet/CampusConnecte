@@ -1,47 +1,38 @@
-<?php
-    session_start();
-
-    if(isset($_SESSION['message_erreur'])) {
-        echo "<p>". $_SESSION['message_erreur'] ."</p>";
-        unset($_SESSION['message_erreur']);
-    }
-?>
-
-<!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
-        <meta charset="utf-8">
         <title>Inscription</title>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="../css/style.css">
     </head>
+    
+    <?php
+    session_start();
+
+    if (isset($_SESSION['user_id'])) {
+        header('Location: tableau_aides.php');
+        exit;
+    }
+
+    if (isset($_SESSION['error_message'])) {
+        echo '<p>'.$_SESSION['error_message'].'</p>';
+        unset($_SESSION['error_message']);
+    }
+    ?>
 
     <body>
-        <div class="boite-inscription">
-            <h2>S'inscrire</h2>
-
-            <form action="formulaire_inscription.php" method="post">
-               <span class="champ">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ""; ?>">
-                </span>
-                <span class="champ">
-                    <label for="mdp">Mot de passe</label>
-                    <input type="password" id="password" name="mdp"/>
-                </span>
-                <span class="champ">
-                    <label for="confirm_mdp">Confirmation du mot de passe</label>
-                    <input type="password" id="confirm_password" name="confirm_mdp"/>
-                </span>
-
-                <input type="submit" value="Valider" name="go">
-                <input type="reset" value="Effacer">
-
-                <p>Déjà inscrit? <a href="connexion.php">Se connecter</a></p>
-            </form>
-        </div>
+        <form action="formulaire_inscription.php" method="post">
+        <label for="email">Pseudo:</label>
+            <input type="text" id="pseudo" name="pseudo" value="<?php echo isset($_SESSION['pseudo']) ? htmlspecialchars($_SESSION['pseudo']) : ''; ?>"><br><br>
+            <label for="email">Adresse e-mail:</label>
+            <input type="email" id="email" name="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>"><br><br>
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <input type="submit" value="S'inscrire">
+        </form>
+        <p>Déjà inscrit ? <a href="connexion.php">Se Connecter</a></p>
     </body>
 
     <?php
-        unset($_SESSION['email']);
+    unset($_SESSION['email']);
     ?>
 </html>

@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
-        <meta charset="utf-8">
         <title>Accueil</title>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
+    <?php
+        session_start();
+
+        if (isset($_SESSION['user_id'])) {
+            header('Location: tableau_aides.php');
+            exit;
+        }
+    ?>
+
     <body>
-        <div class="connexion">
-            <form action="inscription.php">
-                <input type="submit" value="S'inscrire" name="new_account">
-            </form>
-        </div>
-        <div class="paragraphe">
-            <p>
-                <!-- Texte qui met en valeur le site, et "pourquoi choisir ce site ?" -->
-            </p>
-        </div>
+        <a href="inscription.php"><button>Inscription</button></a><br><br>
+        <a href="connexion.php"><button>Connexion</button></a>
     </body>
 </html>

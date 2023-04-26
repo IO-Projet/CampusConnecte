@@ -1,46 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
-        <meta charset="utf-8">
         <title>Promotions</title>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
+    <?php
+        session_start();
+        // Inclusion du fichier de configuration
+        require '../config.php';
+
+        if (!(isset($_SESSION['user_id']))) {
+            header('Location: connexion.php');
+            exit;
+        }
+
+    ?>
+
     <body>
-        <div class="menu">
-            <nav>
-                <a href="user_profil.php">Menu 1</a><br>
-                <a href="message_prive.php">Menu 2</a><br>
-                <a href="tableau_aides.php">Menu 3</a><br>
-                <a href="promotions.php">Menu 4</a><br>
-            </nav>
-        </div>
+        <!-- Menu -->
+        <ul>
+            <li><a href="profile.php">Profil</a></li>
+            <li><a href="message_prives.php">Messages privés</a></li>
+            <li><a href="tableau_aides.php">Aide</a></li>
+            <li><a href="promotions.php">Promotions</a></li>
+            <li><a href="deconnexion.php">Déconnexion</a></li>
+        </ul>
+        <br><br>
 
-        <div class="search">
-            <form action="" method="get">
-                <input type="search" placeholder="Recherche ...">
-                <select name="duree" size="1">
-                    <option value="1"> Ephémère </option>
-                    <option value="2"> Durable </option>
-                </select>
-            </form>
-        </div>
-
-        <!-- Model Annonce -->
-        <div class="annonce">
-            <h3>Titre<?php ?></h3> <!-- Le nom de la matière -->
-            <hr>
-            <p>
-                Description : <?php ?><br>
-                Date de Création : <?php ?><br>
-                Date de Fin : <?php ?><br>
-            </p>
-        </div>
-
-        <div class="add">
-            <form action="" method="post">
-                <input type="submit" value="add" name="new"> <!-- Affiche si l'utilisateur est sur sa page de profile -->
-            </form>
-        </div>
     </body>
 </html>

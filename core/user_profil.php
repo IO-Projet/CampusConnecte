@@ -10,7 +10,7 @@
         <div class="menu">
             <nav>
                 <a href="user_profil.php">Menu 1</a><br>
-                <a href="message_prive.php">Menu 2</a><br>
+                <a href="messages_prive.php">Menu 2</a><br>
                 <a href="tableau_aides.php">Menu 3</a><br>
                 <a href="promotions.php">Menu 4</a><br>
             </nav>
