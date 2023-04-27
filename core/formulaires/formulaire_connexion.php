@@ -1,7 +1,7 @@
 <?php
     session_start();
     // Inclusion du fichier de configuration
-    require '../config.php';
+    require '../../config.php';
 
     // Récupération des données du formulaire
     $email_or_pseudo = $_POST['email_or_pseudo'];
@@ -17,11 +17,11 @@
     if ($user) {
         // Connexion réussie
         $_SESSION['user_id'] = $user['id'];
-        header('Location: tableau_aides.php');
+        header('Location: ../aides.php');
     } else {
         // Connexion échouée
         $_SESSION['error_message'] = "Adresse e-mail ou mot de passe incorrect";
         $_SESSION['email_or_pseudo'] = $email_or_pseudo;
-        header('Location: connexion.php');
+        header('Location: ../connexion.php');
     }
 ?>

@@ -1,7 +1,7 @@
 <?php
     session_start();
     // Inclusion du fichier de configuration
-    require '../config.php';
+    require '../../config.php';
 
     // Récupération des données du formulaire
     $pseudo = strtolower($_POST['pseudo']);
@@ -14,7 +14,7 @@
         // Mot de passe invalide
         $_SESSION['error_message'] = "Le mot de passe doit être supérieur à 3 caractères et inférieur à 31 caractères";
         $_SESSION['email'] = $email;
-        header('Location: inscription.php');
+        header('Location: ../inscription.php');
         exit;
     }
 
@@ -30,13 +30,13 @@
             // L'adresse e-mail existe déjà dans la base de données
             $_SESSION['error_message'] = "Un compte avec cette adresse e-mail existe déjà";
             $_SESSION['email'] = $email;
-            header('Location: inscription.php');
+            header('Location: ../inscription.php');
             exit;
         } else if ($user['pseudo'] == $pseudo) {
             // Le pseudo existe déjà dans la base de données
             $_SESSION['error_message'] = "Un compte avec ce pseudo existe déjà";
             $_SESSION['pseudo'] = $pseudo;
-            header('Location: inscription.php');
+            header('Location: ../inscription.php');
             exit;
         }
     }
@@ -51,5 +51,5 @@
 
     // Connexion réussie
     $_SESSION['user_id'] = $user['id'];
-    header('Location: tableau_aides.php');
+    header('Location: ../aides.php');
 ?>

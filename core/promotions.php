@@ -25,7 +25,7 @@
         $user = $stmt->fetch();
 
         // Récupération des informations de profil de l'utilisateur
-        $pseudo = htmlspecialchars($user['pseudo']);
+        $pseudo_user_connecter = htmlspecialchars($user['pseudo']);
 
         // Récupération des paramètres de recherche et de filtre
         $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -53,9 +53,9 @@
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil - <?php echo $pseudo ?> </a></li>
+            <li><a href="profile.php">Profil - <?php echo $pseudo_user_connecter ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
-            <li><a href="tableau_aides.php">Aide</a></li>
+            <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
             <li><a href="deconnexion.php">Déconnexion</a></li>
         </ul>
@@ -81,6 +81,12 @@
                 Date d'expiration : <?php echo date('d-m-Y', strtotime($annonce['date_end'])); ?><br>
             <?php endif; ?>
         <?php endforeach; ?>
+
+        <script>
+            document.querySelector('select[name="filtre"]').onchange = function() {
+                this.form.submit();
+            };
+        </script>
     </body>
 
     <br>

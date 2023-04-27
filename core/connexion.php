@@ -9,7 +9,7 @@
     session_start();
 
     if (isset($_SESSION['user_id'])) {
-        header('Location: tableau_aides.php');
+        header('Location: aides.php');
         exit;
     }
 
@@ -20,7 +20,7 @@
     ?>
 
     <body>
-        <form action="formulaire_connexion.php" method="post">
+        <form action="formulaires/formulaire_connexion.php" method="post">
             <label for="email_or_pseudo">Adresse e-mail ou Pseudo:</label>
             <input type="text" id="email_or_pseudo" name="email_or_pseudo" value="<?php echo isset($_SESSION['email_or_pseudo']) ? htmlspecialchars($_SESSION['email_or_pseudo']) : ''; ?>"><br><br>
             <label for="password">Mot de passe:</label>

@@ -1,11 +1,11 @@
 <?php
     session_start();
     // Inclusion du fichier de configuration
-    require '../config.php';
+    require '../../config.php';
 
     // Vérification si l'utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
-        header('Location: connexion.php');
+        header('Location: ../connexion.php');
         exit;
     }
 
@@ -82,13 +82,13 @@
             $stmt->execute();
         
             // Redirection vers la page de profil
-            header('Location: profile.php');
+            header('Location: ../profile.php');
             exit;
         } else {
             // Stockage des erreurs dans une variable de session
             $_SESSION['errors'] = $errors;
             // Redirection vers la page profile_edit.php
-            header('Location: profile_edit.php');
+            header('Location: ../profile_edit.php');
             exit;
         }
     }

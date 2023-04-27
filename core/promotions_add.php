@@ -56,7 +56,7 @@
             unset($_SESSION['filtre']);
         ?>
 
-        <form method="post" action="formulaire_promotions_add.php">
+        <form method="post" action="formulaires/formulaire_promotions_add.php">
             <label for="titre">Titre :</label>
             <input type="text" name="titre" id="titre" maxlength="20" value="<?php echo htmlspecialchars($titre); ?>"><br>
 

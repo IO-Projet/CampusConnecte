@@ -1,7 +1,7 @@
 <?php
     session_start();
     // Inclusion du fichier de configuration
-    require '../config.php';
+    require '../../config.php';
 
     if (!(isset($_SESSION['user_id']))) {
         header('Location: connexion.php');
@@ -25,7 +25,7 @@
         $_SESSION['description'] = $description;
         $_SESSION['date_end'] = $date_end;
         $_SESSION['filtre'] = $filtre;
-        header('Location: promotions_add.php');
+        header('Location: ../promotions_add.php');
         exit;
     } else if ($description == '') {
         // Données invalides
@@ -34,7 +34,7 @@
         $_SESSION['description'] = $description;
         $_SESSION['date_end'] = $date_end;
         $_SESSION['filtre'] = $filtre;
-        header('Location: promotions_add.php');
+        header('Location: ../promotions_add.php');
         exit;
     }
 
@@ -60,7 +60,7 @@
         $_SESSION['description'] = $description;
         $_SESSION['date_end'] = $date_end;
         $_SESSION['filtre'] = $filtre;
-        header('Location: promotions_add.php');
+        header('Location: ../promotions_add.php');
         exit;
     }
 
@@ -75,5 +75,5 @@
     $stmt->execute();
 
     // Redirection vers la page des promotions
-    header('Location: promotions.php');
+    header('Location: ../promotions.php');
 ?>

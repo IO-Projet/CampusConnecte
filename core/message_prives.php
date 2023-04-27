@@ -18,7 +18,7 @@
         $user = $stmt->fetch();
 
         // Récupération des informations de profil de l'utilisateur
-        $pseudo = htmlspecialchars($user['pseudo']);
+        $pseudo_user_connecter = htmlspecialchars($user['pseudo']);
 
         // Traitement de la recherche d'un utilisateur
         if (isset($_GET['search'])) {
@@ -91,7 +91,7 @@
     ?>
 
     <head>
-        <title>MP - <?php echo $pseudo ?></title>
+        <title>MP<?php echo isset($pseudo) ? ' - '.$pseudo : '' ?></title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/style.css">
     </head>
@@ -99,9 +99,9 @@
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil - <?php echo $pseudo ?> </a></li>
+            <li><a href="profile.php">Profil - <?php echo $pseudo_user_connecter ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
-            <li><a href="tableau_aides.php">Aide</a></li>
+            <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
             <li><a href="deconnexion.php">Déconnexion</a></li>
         </ul>
@@ -138,7 +138,10 @@
             <?php foreach ($messages as $message): ?>
                 <div class="message <?= $message['user_push'] == $_SESSION['user_id'] ? 'mine' : 'theirs' ?>">
                     <?= htmlspecialchars($message['pseudo']) ?> : <?= nl2br(htmlspecialchars($message['message'])) ?><br>
-                    <em>(<?= date('H:i', strtotime($message['date'])) ?>)</em> <?php if ($message['user_push'] == $_SESSION['user_id']): ?><a href="?delete=<?= urlencode($message['id']) ?>&amp;pseudo=<?= urlencode($pseudo) ?>">⬛</a><?php endif; ?>
+                    <em>(<?= date('H:i', strtotime($message['date'])) ?>)</em>
+                    <?php if ($message['user_push'] == $_SESSION['user_id']): ?>
+                        <a href="?delete=<?= urlencode($message['id']) ?>&amp;pseudo=<?= urlencode($pseudo) ?>">⬛</a>
+                    <?php endif; ?>
                 </div>
                 <br>
             <?php endforeach; ?>

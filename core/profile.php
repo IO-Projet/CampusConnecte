@@ -18,10 +18,11 @@
         $stmt->execute();
         $user = $stmt->fetch();
 
-        // Récupération des informations de profil de l'utilisateur
-        $pseudo = htmlspecialchars($user['pseudo']);
+        // Récupération des informations de profil de l'utilisateur connecter
+        $pseudo_user_connecter = htmlspecialchars($user['pseudo']);
     
         $show_edit_button = false;
+        $show_contact_button = false;
     
         if (isset($_GET['pseudo'])) {
             $pseudo = $_GET['pseudo'];
@@ -39,14 +40,10 @@
             // Affichage du bouton EDIT si l'utilisateur consulte son propre profil
             if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $user['id']) {
                 $show_edit_button = true;
+            } else {
+                $show_contact_button = true;
             }
         } else {
-            // Vérification si l'utilisateur est connecté
-            if (!isset($_SESSION['user_id'])) {
-                header('Location: connexion.php');
-                exit;
-            }
-    
             // Récupération de l'ID de l'utilisateur connecté
             $user_id = $_SESSION['user_id'];
     
@@ -86,13 +83,13 @@
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil - <?php echo $pseudo ?> </a></li>
+            <li><a href="profile.php">Profil - <?php echo $pseudo_user_connecter ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
-            <li><a href="tableau_aides.php">Aide</a></li>
+            <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
             <li><a href="deconnexion.php">Déconnexion</a></li>
         </ul>
-        <br><br>
+
         <h1><?php echo $pseudo ?></h1>
         <p>Nom: <?php echo $nom ?><br>
         Prénom: <?php echo $prenom ?><br>
@@ -102,6 +99,9 @@
 
     <?php if ($show_edit_button): ?>
         <a href="profile_edit.php">EDIT</a>
+    <?php endif; ?>
+    <?php if ($show_contact_button): ?>
+        <a href="message_prives.php?pseudo=<?= $pseudo ?>">CONTACTER</a>
     <?php endif; ?>
 
 </html>
