@@ -35,7 +35,8 @@
                 $stmt = $pdo->prepare("SELECT password FROM users WHERE id = :user_id");
                 $stmt->bindParam(':user_id', $user_id);
                 $stmt->execute();
-                if ($password != $stmt->fetchColumn()) {
+                $hash = $stmt->fetchColumn();
+                if (!password_verify($password, $hash)) {
                     $errors[] = "Le mot de passe actuel est incorrect.";
                 }
             } else {
@@ -69,7 +70,9 @@
             $query .= " WHERE id = :user_id";
             $stmt = $pdo->prepare($query);
             if ($new_password) {
-                $stmt->bindParam(':password', $new_password);
+                // Hachage du nouveau mot de passe avec BCrypt
+                $hash = password_hash($new_password, PASSWORD_BCRYPT);
+                $stmt->bindParam(':password', $hash);
             }
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':prenom', $prenom);

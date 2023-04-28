@@ -7,14 +7,14 @@
     $email_or_pseudo = $_POST['email_or_pseudo'];
     $password = $_POST['password'];
 
-    // Vérification des informations de connexion
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE (email = :email_or_pseudo OR pseudo = :email_or_pseudo) AND password = :password");
+    // Récupération des informations de l'utilisateur
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email_or_pseudo OR pseudo = :email_or_pseudo");
     $stmt->bindParam(':email_or_pseudo', $email_or_pseudo);
-    $stmt->bindParam(':password', $password);
     $stmt->execute();
     $user = $stmt->fetch();
 
-    if ($user) {
+    // Vérification du mot de passe
+    if ($user && password_verify($password, $user['password'])) {
         // Connexion réussie
         $_SESSION['user_id'] = $user['id'];
         header('Location: ../aides.php');

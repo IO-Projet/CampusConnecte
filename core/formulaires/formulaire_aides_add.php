@@ -17,7 +17,7 @@
     $date_end = $_POST['date_end'];
 
     // Validation des données
-    if ($theme == 'Vide') {
+    if ($theme == 0) {
         // Données invalides
         $_SESSION['erreur'] = 1;
         $_SESSION['theme'] = $theme;

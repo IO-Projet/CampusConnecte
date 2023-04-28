@@ -53,7 +53,7 @@ $matieres = $stmt->fetchAll();
 <form method="post" action="formulaires/formulaire_aides_add.php">
     <label for="theme">Thème :</label>
     <select name="theme" id="theme">
-        <option value="">Vide</option>
+        <option value="0">Vide</option>
         <?php foreach ($matieres as $matiere): ?>
             <option value="<?php echo htmlspecialchars($matiere['id']); ?>"><?php echo htmlspecialchars($matiere['nom']); ?></option>
         <?php endforeach; ?>

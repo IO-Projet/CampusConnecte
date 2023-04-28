@@ -16,6 +16,8 @@
         $_SESSION['email'] = $email;
         header('Location: ../inscription.php');
         exit;
+    } else {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
     }
 
     // Vérification si l'adresse e-mail et le pseudo existent déjà dans la base de données
@@ -46,7 +48,7 @@
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->bindParam(':date', $date);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':password', $hash);
     $stmt->execute();
 
     // Connexion réussie
