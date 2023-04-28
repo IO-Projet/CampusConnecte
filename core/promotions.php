@@ -25,7 +25,7 @@
         $user = $stmt->fetch();
 
         // Récupération des informations de profil de l'utilisateur
-        $pseudo_user_connecter = htmlspecialchars($user['pseudo']);
+        $page_user_pseudo = htmlspecialchars($user['pseudo']);
 
         // Récupération des paramètres de recherche et de filtre
         $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -48,12 +48,25 @@
         }
         $stmt->execute();
         $annonces = $stmt->fetchAll();
+
+        // Suppression d'une annonce si l'utilisateur a cliqué sur le lien "Supprimer"
+        if (isset($_GET['delete'])) {
+            $annonce_id = $_GET['delete'];
+
+            $stmt = $pdo->prepare("DELETE FROM annonces_promotions WHERE id = :annonce_id AND author = :user_id");
+            $stmt->bindParam(':annonce_id', $annonce_id);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+
+            header('Location: promotions.php');
+            exit;
+        }
     ?>
 
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil - <?php echo $pseudo_user_connecter ?> </a></li>
+            <li><a href="profile.php">Profil - <?php echo $page_user_pseudo ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
             <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
@@ -80,6 +93,9 @@
             <?php if ($annonce['filtre'] == 'E'): ?>
                 Date d'expiration : <?php echo date('d-m-Y', strtotime($annonce['date_end'])); ?><br>
             <?php endif; ?>
+            <?php if ($user_id == $annonce['author']): ?>
+                <a href="?delete=<?php echo urlencode($annonce['id']) ?>">Supprimer</a><br>
+            <?php endif; ?>
         <?php endforeach; ?>
 
         <script>
@@ -90,5 +106,5 @@
     </body>
 
     <br>
-    <a href="promotions_add.php">ADD</a>
+    <a href="promotions_gerer.php">GERER</a>
 </html>

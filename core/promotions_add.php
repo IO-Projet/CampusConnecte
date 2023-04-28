@@ -27,7 +27,7 @@
     </head>
 
     <body>
-        <a href="promotions.php">Retour</a>
+        <a href="promotions_gerer.php">Retour</a>
 
         <h1>Ajouter une promotion</h1>
 
@@ -61,7 +61,7 @@
             <input type="text" name="titre" id="titre" maxlength="20" value="<?php echo htmlspecialchars($titre); ?>"><br>
 
             <label for="description">Description :</label><br>
-            <textarea name="description" id="description" rows="5" cols="33" maxlength="200"><?php echo htmlspecialchars($description); ?></textarea><br>
+            <textarea name="description" id="description" maxlength="200"><?php echo htmlspecialchars($description); ?></textarea><br>
 
             <input type="radio" name="filtre" id="ephemere" value="E"<?php if ($filtre == 'E' || $filtre == '') echo ' checked'; ?> onclick="toggleDateEnd()">
             <label for="ephemere">Ephémère</label><br>

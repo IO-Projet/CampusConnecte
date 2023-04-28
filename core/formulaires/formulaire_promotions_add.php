@@ -75,5 +75,5 @@
     $stmt->execute();
 
     // Redirection vers la page des promotions
-    header('Location: ../promotions.php');
+    header('Location: ../promotions_gerer.php');
 ?>

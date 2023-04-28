@@ -18,7 +18,7 @@
         $user = $stmt->fetch();
 
         // Récupération des informations de profil de l'utilisateur
-        $pseudo_user_connecter = htmlspecialchars($user['pseudo']);
+        $page_user_pseudo = htmlspecialchars($user['pseudo']);
 
         // Traitement de la recherche d'un utilisateur
         if (isset($_GET['search'])) {
@@ -99,7 +99,7 @@
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil - <?php echo $pseudo_user_connecter ?> </a></li>
+            <li><a href="profile.php">Profil - <?php echo $page_user_pseudo ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
             <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>

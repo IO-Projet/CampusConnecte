@@ -19,7 +19,13 @@
         $user = $stmt->fetch();
 
         // Récupération des informations de profil de l'utilisateur connecter
-        $pseudo_user_connecter = htmlspecialchars($user['pseudo']);
+        $page_user_pseudo = htmlspecialchars($user['pseudo']);
+        $page_user_id = htmlspecialchars($user['id']);;
+
+        // Récupération des commentaires de la table 'profile_commentaires'
+        $stmt = $pdo->prepare('SELECT profile_commentaires.message, users.pseudo FROM profile_commentaires INNER JOIN users ON profile_commentaires.user_send = users.id WHERE profile_commentaires.user_id = :user_id');
+        $stmt->execute([':user_id' => $page_user_id]);
+        $comments = $stmt->fetchAll();
     
         $show_edit_button = false;
         $show_contact_button = false;
@@ -83,7 +89,7 @@
     <body>
         <!-- Menu -->
         <ul>
-            <li><a href="profile.php">Profil - <?php echo $pseudo_user_connecter ?> </a></li>
+            <li><a href="profile.php">Profil - <?php echo $page_user_pseudo ?> </a></li>
             <li><a href="message_prives.php">Messages privés</a></li>
             <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
@@ -101,7 +107,20 @@
         <a href="profile_edit.php">EDIT</a>
     <?php endif; ?>
     <?php if ($show_contact_button): ?>
-        <a href="message_prives.php?pseudo=<?= $pseudo ?>">CONTACTER</a>
+        <a href="message_prives.php?pseudo=<?= $pseudo ?>">CONTACTER</a><br>
+
+        <form action="formulaires/formulaire_profile_commentaires.php" method="post">
+            <br>
+            <input type="hidden" name="page_user_id" value="<?php echo $page_user_id; ?>">
+            <input type="hidden" name="connected_user_id" value="<?php echo $user_id; ?>">
+            <textarea name="message" id="message" maxlength="2000"></textarea><br>
+            <input type="submit" value="Envoyer">
+        </form>
     <?php endif; ?>
+    <h2>Commentaires</h2>
+    <?php foreach ($comments as $comment): ?>
+        <p><?php echo $comment['pseudo']; ?> à écrit : <br>
+            <?php echo $comment['message']; ?></p>
+    <?php endforeach; ?>
 
 </html>
