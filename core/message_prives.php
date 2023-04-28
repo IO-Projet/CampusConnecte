@@ -105,7 +105,6 @@
             <li><a href="promotions.php">Promotions</a></li>
             <li><a href="deconnexion.php">Déconnexion</a></li>
         </ul>
-        <br><br>
 
         <h1>Messages privés</h1>
 
