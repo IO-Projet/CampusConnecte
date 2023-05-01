@@ -78,6 +78,13 @@
             <li><a href="message_prives.php">Messages privés</a></li>
             <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
+            <?php
+            if ($user['admin'] == 1) {
+                echo '<li><a href="adminpannel.php">Panneau d\'administration</a></li>';
+            } else {
+                echo '<li><a href="contacte.php">Contacte Administrateurs</a></li>';
+            }
+            ?>
             <li><a href="deconnexion.php">Déconnexion</a></li>
         </ul>
 

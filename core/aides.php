@@ -103,6 +103,13 @@
             <li><a href="message_prives.php">Messages privés</a></li>
             <li><a href="aides.php">Aide</a></li>
             <li><a href="promotions.php">Promotions</a></li>
+            <?php
+            if ($user['admin'] == 1) {
+                echo '<li><a href="adminpannel.php">Panneau d\'administration</a></li>';
+            } else {
+                echo '<li><a href="contacte.php">Contacte Administrateurs</a></li>';
+            }
+            ?>
             <li><a href="deconnexion.php">Déconnexion</a></li>
         </ul>
 
@@ -150,7 +157,7 @@
                 Description : <br><?php echo nl2br(htmlspecialchars($annonce['description'])) ?><br>
                 Date de création : <?php echo date('d-m-Y', strtotime($annonce['date_start'])) ?><br>
                 Date d'expiration : <?php echo date('d-m-Y', strtotime($annonce['date_end'])) ?></p>
-            <?php if ($user_id == $annonce['author']): ?>
+            <?php if ($user_id == $annonce['author'] || $user['admin'] == 1): ?>
                 Like (<?php echo $like_count; ?>)
                 <a href="?delete=<?php echo urlencode($annonce['id']) ?>">Supprimer</a><br>
             <?php else: ?>
