@@ -2,46 +2,46 @@
 <head>
     <title>Ajouter une promotion</title>
     <meta charset="utf-8">
+    <link rel="icon" href="../icons/help.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <?php
-session_start();
-// Inclusion du fichier de configuration
-require '../config.php';
+    session_start();
+    // Inclusion du fichier de configuration
+    require '../config.php';
 
-if (!(isset($_SESSION['user_id']))) {
-    header('Location: connexion.php');
-    exit;
-}
+    if (!(isset($_SESSION['user_id']))) {
+        header('Location: connexion.php');
+        exit;
+    }
 
-// Récupère l'ID de l'utilisateur connecté
-$user_id = $_SESSION['user_id'];
+    // Récupère l'ID de l'utilisateur connecté
+    $user_id = $_SESSION['user_id'];
 
-// Prépare et exécute la requête SQL pour récupérer les annonces de l'utilisateur connecté
-$stmt = $pdo->prepare('SELECT * FROM annonces_aides WHERE author = :author');
-$stmt->execute(['author' => $user_id]);
-$annonces = $stmt->fetchAll();
+    // Prépare et exécute la requête SQL pour récupérer les annonces de l'utilisateur connecté
+    $stmt = $pdo->prepare('SELECT * FROM annonces_aides WHERE author = :author');
+    $stmt->execute(['author' => $user_id]);
+    $annonces = $stmt->fetchAll();
 
-// Suppression d'une annonce si l'utilisateur a cliqué sur le lien "Supprimer"
-if (isset($_GET['delete'])) {
-    $annonce_id = $_GET['delete'];
+    // Suppression d'une annonce si l'utilisateur a cliqué sur le lien "Supprimer"
+    if (isset($_GET['delete'])) {
+        $annonce_id = $_GET['delete'];
 
-    $stmt = $pdo->prepare("DELETE FROM annonces_aides WHERE id = :annonce_id AND author = :user_id");
-    $stmt->bindParam(':annonce_id', $annonce_id);
-    $stmt->bindParam(':user_id', $user_id);
-    $stmt->execute();
+        $stmt = $pdo->prepare("DELETE FROM annonces_aides WHERE id = :annonce_id AND author = :user_id");
+        $stmt->bindParam(':annonce_id', $annonce_id);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
 
-    header('Location: aides_gerer.php');
-    exit;
-}
-
+        header('Location: aides_gerer.php');
+        exit;
+    }
 ?>
 
 <body>
 <a href="aides.php">Retour</a>
 
-<h1>Gérer mes demande d'aide</h1>
+<h1>Gérer mes demandes d'aide</h1>
 
 <!-- Liste des annonces -->
 <?php

@@ -2,6 +2,7 @@
     <head>
         <title>Connexion</title>
         <meta charset="utf-8">
+        <link rel="icon" href="../icons/login.png" type="image/png">
         <link rel="stylesheet" href="../css/style.css">
     </head>
 

@@ -2,6 +2,7 @@
 <head>
     <title>Ajouter une promotion</title>
     <meta charset="utf-8">
+    <link rel="icon" href="../icons/promotion.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 

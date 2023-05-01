@@ -2,6 +2,7 @@
     <head>
         <title>Profile</title>
         <meta charset="utf-8">
+        <link rel="icon" href="../icons/user.png" type="image/png">
         <link rel="stylesheet" href="../css/style.css">
     </head>
 

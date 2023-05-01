@@ -2,6 +2,7 @@
     <head>
         <title>Accueil</title>
         <meta charset="utf-8">
+        <link rel="icon" href="../icons/accueil.png" type="image/png">
         <link rel="stylesheet" href="../css/style.css">
     </head>
 

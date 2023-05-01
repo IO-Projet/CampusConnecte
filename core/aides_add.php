@@ -31,6 +31,7 @@ $matieres = $stmt->fetchAll();
 <head>
     <title>Ajouter une promotion</title>
     <meta charset="utf-8">
+    <link rel="icon" href="../icons/help.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 

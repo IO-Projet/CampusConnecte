@@ -2,6 +2,7 @@
     <head>
         <title>Aide</title>
         <meta charset="utf-8">
+        <link rel="icon" href="../icons/help.png" type="image/png">
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
@@ -98,20 +99,16 @@
 
     <body>
         <!-- Menu -->
-        <ul>
-            <li><a href="profile.php">Profil - <?php echo $page_user_pseudo ?> </a></li>
-            <li><a href="message_prives.php">Messages privés</a></li>
-            <li><a href="aides.php">Aide</a></li>
-            <li><a href="promotions.php">Promotions</a></li>
-            <?php
-            if ($user['admin'] == 1) {
-                echo '<li><a href="adminpannel.php">Panneau d\'administration</a></li>';
-            } else {
-                echo '<li><a href="contacte.php">Contacte Administrateurs</a></li>';
-            }
-            ?>
-            <li><a href="deconnexion.php">Déconnexion</a></li>
-        </ul>
+        <a href="profile.php" title="Profil - <?php echo $page_user_pseudo ?>"><img src="../icons/user.png" alt="Profil - <?php echo $page_user_pseudo ?>" width="32" height="32"></a><br>
+        <a href="message_prives.php" title="Messages privés"><img src="../icons/message.png" alt="Messages privés" width="32" height="32"></a><br>
+        <a href="aides.php" title="Aide"><img src="../icons/help.png" alt="Aide" width="32" height="32"></a><br>
+        <a href="promotions.php" title="Promotions"><img src="../icons/promotion.png" alt="Promotions" width="32" height="32"></a><br>
+        <?php if ($user['admin'] == 1) : ?>
+            <a href="adminpannel.php" title="Panneau d\'administration"><img src="../icons/admin.png" alt="Panneau d\'administration" width="32" height="32"></a><br>
+        <?php else : ?>
+            <a href="contacte.php" title="Contacte Administrateurs"><img src="../icons/contact.png" alt="Contacte Administrateurs" width="32" height="32"></a><br>
+        <?php endif; ?>
+        <a href="deconnexion.php" title="Déconnexion"><img src="../icons/logout.png" alt="Déconnexion" width="32" height="32"></a><br>
 
         <!-- Liste des thèmes -->
         <form method="get" id="filter-form">
@@ -158,8 +155,10 @@
                 Date de création : <?php echo date('d-m-Y', strtotime($annonce['date_start'])) ?><br>
                 Date d'expiration : <?php echo date('d-m-Y', strtotime($annonce['date_end'])) ?></p>
             <?php if ($user_id == $annonce['author'] || $user['admin'] == 1): ?>
-                Like (<?php echo $like_count; ?>)
-                <a href="?delete=<?php echo urlencode($annonce['id']) ?>">Supprimer</a><br>
+                Like(s) (<?php echo $like_count; ?>)
+                <form action="?delete=<?php echo urlencode($annonce['id']) ?>">
+                    <input type="submit" value="SUPPRIMER"><br>
+                </form>
             <?php else: ?>
                 <form method="post">
                     <input type="hidden" name="like" value="<?php echo $annonce['id']; ?>">
