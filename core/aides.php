@@ -104,7 +104,7 @@
         <a href="aides.php" title="Aide"><img src="../icons/help.png" alt="Aide" width="32" height="32"></a><br>
         <a href="promotions.php" title="Promotions"><img src="../icons/promotion.png" alt="Promotions" width="32" height="32"></a><br>
         <?php if ($user['admin'] == 1) : ?>
-            <a href="adminpannel.php" title="Panneau d\'administration"><img src="../icons/admin.png" alt="Panneau d\'administration" width="32" height="32"></a><br>
+            <a href="adminpannel.php" title="Panneau d'administration"><img src="../icons/admin.png" alt="Panneau d\'administration" width="32" height="32"></a><br>
         <?php else : ?>
             <a href="contacte.php" title="Contacte Administrateurs"><img src="../icons/contact.png" alt="Contacte Administrateurs" width="32" height="32"></a><br>
         <?php endif; ?>
