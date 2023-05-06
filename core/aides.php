@@ -65,9 +65,8 @@
         if (isset($_GET['delete'])) {
             $annonce_id = $_GET['delete'];
 
-            $stmt = $pdo->prepare("DELETE FROM annonces_aides WHERE id = :annonce_id AND author = :user_id");
+            $stmt = $pdo->prepare("DELETE FROM annonces_aides WHERE id = :annonce_id");
             $stmt->bindParam(':annonce_id', $annonce_id);
-            $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();
 
             header('Location: aides.php');
@@ -156,8 +155,9 @@
                 Date d'expiration : <?php echo date('d-m-Y', strtotime($annonce['date_end'])) ?></p>
             <?php if ($user_id == $annonce['author'] || $user['admin'] == 1): ?>
                 Like(s) (<?php echo $like_count; ?>)
-                <form action="?delete=<?php echo urlencode($annonce['id']) ?>">
-                    <input type="submit" value="SUPPRIMER"><br>
+                <form action="aides.php" method="get">
+                    <input type="hidden" name="delete" value="<?php echo $annonce['id']; ?>">
+                    <input type="submit" value="SUPPRIMER">
                 </form>
             <?php else: ?>
                 <form method="post">

@@ -54,15 +54,20 @@
         if (isset($_GET['delete'])) {
             $annonce_id = $_GET['delete'];
 
-            $stmt = $pdo->prepare("DELETE FROM annonces_promotions WHERE id = :annonce_id AND author = :user_id");
-            $stmt->bindParam(':annonce_id', $annonce_id);
-            $stmt->bindParam(':user_id', $user_id);
+            if ($user['admin'] == 1) {
+                $stmt = $pdo->prepare("DELETE FROM annonces_promotions WHERE id = :annonce_id");
+                $stmt->bindParam(':annonce_id', $annonce_id);
+            } else {
+                $stmt = $pdo->prepare("DELETE FROM annonces_promotions WHERE id = :annonce_id AND author = :user_id");
+                $stmt->bindParam(':annonce_id', $annonce_id);
+                $stmt->bindParam(':user_id', $user_id);
+            }
             $stmt->execute();
 
             header('Location: promotions.php');
             exit;
         }
-    ?>
+        ?>
 
     <body>
         <!-- Menu -->
@@ -97,9 +102,10 @@
             <?php if ($annonce['filtre'] == 'E'): ?>
                 Date d'expiration : <?php echo date('d-m-Y', strtotime($annonce['date_end'])); ?><br>
             <?php endif; ?>
-            <?php if ($user_id == $annonce['author']): ?>
-                <form action="?delete=<?php echo urlencode($annonce['id']) ?>">
-                    <input type="submit" value="SUPPRIMER"><br>
+            <?php if ($user_id == $annonce['author'] || $user['admin'] == 1): ?>
+                <form action="promotions.php" method="get">
+                    <input type="hidden" name="delete" value="<?php echo $annonce['id']; ?>">
+                    <input type="submit" value="SUPPRIMER">
                 </form>
             <?php endif; ?>
         <?php endforeach; ?>
