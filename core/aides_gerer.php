@@ -37,7 +37,7 @@
         exit;
     }
 ?>
-
+ 
 <body>
 <a href="aides.php">Retour</a>
 

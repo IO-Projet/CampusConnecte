@@ -9,13 +9,19 @@
     $email = strtolower($_POST['email']);
     $password = strtolower($_POST['password']);
 
-    // Validation du mot de passe
+    // Validation si le pseudo n'est pas vide, et si le mot de passe est conforme pour une bonne sécurité
     if (strlen($password) < 4 || strlen($password) > 30) {
         // Mot de passe invalide
         $_SESSION['error_message'] = "Le mot de passe doit être supérieur à 3 caractères et inférieur à 31 caractères";
         $_SESSION['email'] = $email;
         header('Location: ../inscription.php');
         exit;
+    } else if (empty($_POST['pseudo'])) {
+        // Le champ pseudo n'à pas été remplis
+        $_SESSION['error_message'] = "Le champ Pseudo est vide";
+        $_SESSION['email'] = $email;
+        header('Location: ../inscription.php');
+        exit();
     } else {
         $hash = password_hash($password, PASSWORD_BCRYPT);
     }
