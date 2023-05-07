@@ -25,8 +25,10 @@
         $stmt->execute();
         $user = $stmt->fetch();
 
-        // Récupération des informations de profil de l'utilisateur
-        $page_user_pseudo = htmlspecialchars($user['pseudo']);
+        if ($user['admin'] != 1) {
+            header('Location: aides.php');
+            exit;
+        }
 
         // Ajout d'une matière
         if (isset($_POST['nom_matiere'])) {
@@ -74,7 +76,7 @@
 
     <body>
         <!-- Menu -->
-        <a href="profile.php" title="Profil - <?php echo $page_user_pseudo ?>"><img src="../icons/user.png" alt="Profil - <?php echo $page_user_pseudo ?>" width="32" height="32"></a><br>
+        <a href="profile.php" title="Profil - <?php echo htmlspecialchars($user['pseudo']) ?>"><img src="../icons/user.png" alt="Profil - <?php echo htmlspecialchars($user['pseudo']) ?>" width="32" height="32"></a><br>
         <a href="message_prives.php" title="Messages privés"><img src="../icons/message.png" alt="Messages privés" width="32" height="32"></a><br>
         <a href="aides.php" title="Aide"><img src="../icons/help.png" alt="Aide" width="32" height="32"></a><br>
         <a href="promotions.php" title="Promotions"><img src="../icons/promotion.png" alt="Promotions" width="32" height="32"></a><br>
