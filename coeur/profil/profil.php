@@ -24,7 +24,7 @@
             exit;
         }
     
-        $req = $pdo -> prepare("SELECT id, pseudo FROM users WHERE id = :id");
+        $req = $pdo -> prepare("SELECT id, pseudo, admin FROM users WHERE id = :id");
         $req -> execute([':id' => $_SESSION['user_id']]);
         $user_connecte = $req -> fetch(PDO::FETCH_ASSOC);
     
@@ -70,7 +70,7 @@
 
     $biographie = "";
     if(!empty($user['bio'])) {
-        $biographie = "Biographie: ".ucfirst(htmlspecialchars($user['bio']));
+        $biographie = "Biographie: <br>".ucfirst(htmlspecialchars($user['bio']));
     }
     
     // Récupération des commentaires de la table 'profil_commentaires'
@@ -101,7 +101,7 @@
             $nav = new ClasseNavigation();
             $nav -> sendMenuPlusUn(
                 isset($user_connecte['pseudo']) ? $user_connecte['pseudo'] : $pseudo,
-                (isset($user['admin']) ? $user['admin'] : $user_connecte['admin'])
+                (isset($user_connecte['admin']) ? $user_connecte['admin'] : $user['admin'])
             );
         ?>
         <h1>Profil - <?php echo $pseudo; if($user['admin'] == 1) echo " [Administrateur]"; ?></h1>
@@ -112,10 +112,12 @@
         </p>
 
         <p>
-            Statut : Etudiant
+            Statut :
             <?php
                 if($sexe == 'F') {
-                    echo "e";
+                    echo "Etudiante";
+                } else {
+                    echo "Etudiant";
                 }
             ?>
             <br>

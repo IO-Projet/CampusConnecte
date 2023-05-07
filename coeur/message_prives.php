@@ -121,7 +121,7 @@
     <head>
         <title>MP<?php echo isset($user['pseudo']) ? ' - '. $user['pseudo'] : '' ?></title>
         <meta charset="utf-8">
-        <link rel="icon" href="../icons/message.png" type="image/png">
+        <link rel="icon" href="../icones/message.png" type="image/png">
         <link rel="stylesheet" href="../css/style.css">
     </head>
 

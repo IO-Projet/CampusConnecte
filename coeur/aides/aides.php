@@ -180,9 +180,9 @@
         <!-- JavaScript pour soumettre le formulaire automatiquement lorsque l'utilisateur clique sur une case à cocher -->
         <!-- L'URL est donc changé avec des caractères d'échappement pour éviter tout conflit HTML. → %5b = [ | %5D = ] -->
         <script>
-            document.querySelectorAll('#filter-form input[type=checkbox]').forEach(function(checkbox) {
+            document.querySelectorAll('#filtre-form input[type=checkbox]').forEach(function(checkbox) {
                 checkbox.addEventListener('change', function() {
-                    document.querySelector('#filter-form').submit();
+                    document.querySelector('#filtre-form').submit();
                 });
             });
         </script>
