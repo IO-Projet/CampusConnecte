@@ -73,8 +73,8 @@
     }
 
     // Ajout de l'annonce à la base de données
-    $req = $pdo -> prepare('INSERT INTO annonces_promotions (auteur, titre, description, date_debut, date_fin, filtre) VALUES (:auteur, :titre, :description, :date_debut, :date_fin, :filtre)');
-    $req -> bindParam(':auteur', $user_id);
+    $req = $pdo -> prepare('INSERT INTO annonces_promotions (auteur_promotion, titre, description, date_debut, date_fin, filtre) VALUES (:auteur_promotion, :titre, :description, :date_debut, :date_fin, :filtre)');
+    $req -> bindParam(':auteur_promotion', $user_id);
     $req -> bindParam(':titre', $titre);
     $req -> bindParam(':description', $description);
     $req -> bindParam(':date_debut', $date_debut);

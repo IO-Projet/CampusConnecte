@@ -35,7 +35,7 @@
         SELECT annonces_aides.*, users.pseudo, matieres.nom 
         FROM annonces_aides 
         JOIN users 
-        ON annonces_aides.auteur = users.id 
+        ON annonces_aides.auteur_aide = users.id 
         JOIN matieres 
         ON annonces_aides.theme = matieres.id
         ';
@@ -64,7 +64,7 @@
     $annonces = $req -> fetchAll();
 
     // Récupération des thèmes uniques et de leur nombre d'occurrences
-    $req = $pdo -> prepare('SELECT matieres.nom, COUNT(*) as count FROM annonces_aides JOIN matieres ON annonces_aides.theme = matieres.id GROUP BY matieres.nom');
+    $req = $pdo -> prepare('SELECT matieres.nom, COUNT(*) as comptage FROM annonces_aides JOIN matieres ON annonces_aides.theme = matieres.id GROUP BY matieres.nom');
     $req -> execute();
     $themes = $req -> fetchAll();
 

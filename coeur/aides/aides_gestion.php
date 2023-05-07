@@ -81,7 +81,7 @@
     <br>
 
     <form action="aides_ajout.php">
-        <input type="button" value="Ajouter une aide" id="add-button">
+        <input type="submit" value="Ajouter une aide" id="add-button">
     </form>
 
     <!--
@@ -94,10 +94,9 @@
             document.getElementById('add-button').disabled = true;
             document.getElementById('message').textContent = "Vous avez atteint la limite de 5 annonces.";
         } else {
-            document.getElementById('add-button')
-                .addEventListener('click', function() {
-                    window.location.href = 'aides_add.php');
-                });
+            document.getElementById('add-button').addEventListener('click', function() {
+                    window.location.href = 'aides_ajout.php');
+            });
         }
     </script>
 </html>

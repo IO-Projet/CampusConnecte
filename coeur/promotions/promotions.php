@@ -43,7 +43,7 @@
     $req = $pdo -> prepare($sql);
 
     if($recherche != '') {
-        $req -> bindValue(':supprimer', '%'. $recherche .'%');
+        $req -> bindValue(':rechercher', '%'. $recherche .'%');
     }
 
     if($filtre != '') {
@@ -92,8 +92,8 @@
             <input type="text" name="recherche" value="<?php echo htmlspecialchars($recherche); ?>">
             <select name="filtre">
                 <option value="">Aucun</option>
-                <option value="E" <?php if ($filtre == 'E') echo 'sélectionné'; ?>>Ephémère</option>
-                <option value="D" <?php if ($filtre == 'D') echo 'sélectionné'; ?>>Durable</option>
+                <option value="E" <?php if ($filtre == 'E') echo 'selected'; ?>>Ephémère</option>
+                <option value="D" <?php if ($filtre == 'D') echo 'selected'; ?>>Durable</option>
             </select>
             <input type="submit" value="Rechercher">
         </form>
@@ -103,15 +103,16 @@
             <h2><?php echo htmlspecialchars($annonce['titre']); ?></h2>
             Par : <a href="../profil/profil.php?pseudo=<?= urlencode($annonce['pseudo']) ?>"> <?php echo htmlspecialchars($annonce['pseudo']); ?></a><br>
             Description : <br><?php echo htmlspecialchars($annonce['description']); ?>
-            Posté le : <?php echo date('d-m-Y', strtotime($annonce['date_start'])); ?><br>
+            Posté le : <?php echo date('d-m-Y', strtotime($annonce['date_debut'])); ?><br>
             <?php
                 if($annonce['filtre'] == 'E') {
                     echo "Date d'expiration : ". date('d-m-Y', strtotime($annonce['date_fin']));
                 }
             ?>
             <?php if($user_id == $annonce['auteur_promotion']): ?>
-                <form action="?supprimer=<?php echo urlencode($annonce['id']) ?>">
-                    <input type="submit" value="Supprimer"><br>
+                <form action="promotions.php" method="get">
+                    <input type="hidden" name="supprimer" value="<?php echo $annonce['id']; ?>">
+                    <input type="submit" value="SUPPRIMER">
                 </form>
             <?php endif; ?>
         <?php endforeach; ?>

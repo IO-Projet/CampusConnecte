@@ -70,7 +70,7 @@
 
     $biographie = "";
     if(!empty($user['bio'])) {
-        $biographie = ucfirst(htmlspecialchars($user['bio']));
+        $biographie = "Biographie: ".ucfirst(htmlspecialchars($user['bio']));
     }
     
     // Récupération des commentaires de la table 'profil_commentaires'
@@ -119,7 +119,8 @@
                 }
             ?>
             <br>
-            Biographie : <br><?php echo $biographie ?>
+
+            <br><?php echo $biographie ?>
         </p>
         
         <?php if($montrer_bouton_modif): ?>

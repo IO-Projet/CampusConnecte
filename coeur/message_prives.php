@@ -142,8 +142,8 @@
             </form>
 
             <!-- Affichage d'un message d'erreur si aucun utilisateur n'a été trouvé lors de la recherche -->
-            <?php if (isset($error)): ?>
-                <p><?php echo htmlspecialchars($error) ?></p>
+            <?php if (isset($erreur)): ?>
+                <p><?php echo htmlspecialchars($erreur) ?></p>
             <?php endif; ?>
 
             <!-- Menu avec la liste des utilisateurs avec lesquels l'utilisateur connecté a déjà eu une conversation -->

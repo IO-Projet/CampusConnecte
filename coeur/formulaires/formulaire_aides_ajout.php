@@ -2,7 +2,7 @@
     session_start();
     // Inclusion du fichier de configuration
     require '../../config.php';
-    require 'classes/ClasseVerification.php';
+    require '../classes/ClasseVerification.php';
 
     $verif = new ClasseVerification();
     $verif -> isNotSet("../connexion.php");
@@ -54,8 +54,8 @@
     }
 
     // Ajout de l'annonce à la base de données
-    $req = $pdo -> prepare("INSERT INTO annonces_aides (auteur, theme, description, date_debut, date_fin) VALUES (:auteur, :theme, :description, :date_debut, :date_fin)");
-    $req -> bindParam(':auteur', $user_id);
+    $req = $pdo -> prepare("INSERT INTO annonces_aides (auteur_aide, theme, description, date_debut, date_fin) VALUES (:auteur_aide, :theme, :description, :date_debut, :date_fin)");
+    $req -> bindParam(':auteur_aide', $user_id);
     $req -> bindParam(':theme', $theme);
     $req -> bindParam(':description', $description);
     $req -> bindParam(':date_debut', $date_debut);

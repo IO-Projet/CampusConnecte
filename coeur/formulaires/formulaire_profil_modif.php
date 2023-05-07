@@ -41,7 +41,7 @@
                 $erreurs[] = "Veuillez saisir votre mot de passe actuel.";
             }
 
-            $req = $pdo -> prepare('SELECT password FROM users WHERE id = :user_id');
+            $req = $pdo -> prepare('SELECT mdp FROM users WHERE id = :user_id');
             $req -> bindParam(':user_id', $user_id);
             $req -> execute();
             $hash = $req -> fetchColumn();
@@ -52,8 +52,8 @@
         }
 
         // Vérification du nouveau mot de passe
-        if(($nouveau_mdp != $confirm_mdp || !$confirm_mdp) && $nouveau_mdp) {
-            $erreurs[] = "Les mots de passe ne correspondent pas.";
+        if ($nouveau_mdp && (!$confirm_mdp || $nouveau_mdp != $confirm_mdp)) {
+            $errors[] = "Les mots de passe ne correspondent pas.";
         }
 
         // Vérification du pseudo

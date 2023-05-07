@@ -25,7 +25,7 @@
     if(isset($_GET['supprimer'])) {
         $annonce_id = $_GET['supprimer'];
 
-        $req = $pdo -> prepare("DELETE FROM annonces_promotions WHERE id = :annonce_id AND author = :user_id");
+        $req = $pdo -> prepare("DELETE FROM annonces_promotions WHERE id = :annonce_id AND auteur_promotion = :user_id");
         $req -> bindParam(':annonce_id', $annonce_id);
         $req -> bindParam(':user_id', $user_id);
         $req -> execute();
@@ -56,7 +56,7 @@
                 // Affichage des annonces
                 echo '<h2>Annonce n°'. $i .' : '. htmlspecialchars($annonce['titre']) .'</h2>';
                 echo '<p>'
-                    .'Description : <br>'. htmlspecialchars($annonce['description'])
+                    .'Description : <br>'. htmlspecialchars($annonce['description']). '<br>'
                     .'Posté le : '. date('d-m-Y', strtotime($annonce['date_debut']))
                     .'</p>';
 
@@ -65,7 +65,7 @@
                 }
 
                 if($user_id == $annonce['auteur_promotion']) {
-                    echo '<a href="?supprimer='. urlencode($annonce['id']) .'">Supprimer</a>'.'<br>';
+                    echo '<br>'.'<a href="?supprimer='. urlencode($annonce['id']) .'">Supprimer</a>'.'<br>';
                 }
                 $i++;
             }

@@ -19,7 +19,7 @@
 
     // Récupération des informations de profil de l'utilisateur
     if($user['admin'] != 1) {
-        header('Location: aides.php');
+        header('Location: aides/aides.php');
         exit;
     }
 

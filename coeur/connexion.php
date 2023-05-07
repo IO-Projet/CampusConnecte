@@ -20,9 +20,9 @@
     <body>
         <form action="formulaires/formulaire_connexion.php" method="post">
             <label for="email_ou_pseudo">Adresse e-mail ou Pseudo</label>
-            <input type="text" id="email_ou_pseudo" name="email_ou_pseudo" value="<?php echo isset($_SESSION['email_ou_pseudo']) ? htmlspecialchars($_SESSION['email_ou_pseudo']) : ''; ?>">
+            <input type="text" id="email_ou_pseudo" name="email_ou_pseudo" value="<?php echo isset($_SESSION['email_ou_pseudo']) ? htmlspecialchars($_SESSION['email_ou_pseudo']) : ''; ?>"><br>
             <label for="mdp">Mot de passe</label>
-            <input type="password" id="mdp" name="mdp">
+            <input type="password" id="mdp" name="mdp"><br>
             <input type="submit" value="Se connecter">
         </form>
         <p>Pas encore inscrit ? <a href="inscription.php">S'inscrire</a></p>
