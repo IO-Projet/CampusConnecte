@@ -31,4 +31,4 @@ Pour installer notre site, suivez les étapes suivantes:
     * `dbname=`: le nom de votre base de données.
     * Dans les premières `""`: l'identifiant de l'administrateur de la base de données.
     * Dans les secondes `""`: le mot de passe de l'administrateur de la base de données.
-3. Importez les tables de base dans votre base de données. Le fichier à importer est `tables.sql`. Vous trouverez des instructions sur la façon d'importer les tables dans phpMyAdmin pour XAMPP et MAMP.
+3. Importez les tables de base dans votre base de données. Le fichier à importer est `bddcc.sql`. Vous trouverez des instructions sur la façon d'importer les tables dans phpMyAdmin pour XAMPP et MAMP.

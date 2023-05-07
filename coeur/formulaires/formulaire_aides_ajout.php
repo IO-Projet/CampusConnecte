@@ -2,11 +2,10 @@
     session_start();
     // Inclusion du fichier de configuration
     require '../../config.php';
+    require 'classes/ClasseVerification.php';
 
-    if (!(isset($_SESSION['user_id']))) {
-        header('Location: connexion.php');
-        exit;
-    }
+    $verif = new ClasseVerification();
+    $verif -> isNotSet("../connexion.php");
 
     // Récupération de l'ID de l'utilisateur connecté
     $user_id = $_SESSION['user_id'];
@@ -14,55 +13,55 @@
     // Récupération des données du formulaire
     $theme = isset($_POST['theme']) ? $_POST['theme'] : '';
     $description = isset($_POST['description']) ? $_POST['description'] : '';
-    $date_end = $_POST['date_end'];
+    $date_fin = $_POST['date_fin'];
 
     // Validation des données
-    if ($theme == 0) {
+    if($theme == 0) {
         // Données invalides
         $_SESSION['erreur'] = 1;
         $_SESSION['theme'] = $theme;
         $_SESSION['description'] = $description;
-        $_SESSION['date_end'] = $date_end;
-        header('Location: ../aides_add.php');
+        $_SESSION['date_fin'] = $date_fin;
+        header('Location: ../aides/aides_ajout.php');
         exit;
-    } else if ($description == '') {
+    } else if($description == '') {
         // Données invalides
         $_SESSION['erreur'] = 2;
         $_SESSION['theme'] = $theme;
         $_SESSION['description'] = $description;
-        $_SESSION['date_end'] = $date_end;
-        header('Location: ../aides_add.php');
+        $_SESSION['date_fin'] = $date_fin;
+        header('Location: ../aides/aides_ajout.php');
         exit;
     }
 
     // Calcul de la date de début
-    $date_start = date('Y-m-d');
+    $date_debut = date('Y-m-d');
 
     // Date d'expiration renseignée par l'utilisateur ou dans 1 mois
-    if ($date_end == '') {
-        $date_end = date('Y-m-d', strtotime('+1 month'));
+    if($date_fin == '') {
+        $date_fin = date('Y-m-d', strtotime('+1 month'));
     }
 
     // Vérification de la validité de la date d'expiration
-    if (strtotime($date_end) < time()) {
+    if(strtotime($date_fin) < time()) {
         // Date d'expiration invalide
         $_SESSION['erreur'] = 3;
         $_SESSION['theme'] = $theme;
         $_SESSION['description'] = $description;
-        $_SESSION['date_end'] = $date_end;
-        header('Location: ../aides_add.php');
+        $_SESSION['date_fin'] = $date_fin;
+        header('Location: ../aides/aides_ajout.php');
         exit;
     }
 
     // Ajout de l'annonce à la base de données
-    $stmt = $pdo->prepare("INSERT INTO annonces_aides (author, theme, description, date_start, date_end) VALUES (:author, :theme, :description, :date_start, :date_end)");
-    $stmt->bindParam(':author', $user_id);
-    $stmt->bindParam(':theme', $theme);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':date_start', $date_start);
-    $stmt->bindParam(':date_end', $date_end);
-    $stmt->execute();
+    $req = $pdo -> prepare("INSERT INTO annonces_aides (auteur, theme, description, date_debut, date_fin) VALUES (:auteur, :theme, :description, :date_debut, :date_fin)");
+    $req -> bindParam(':auteur', $user_id);
+    $req -> bindParam(':theme', $theme);
+    $req -> bindParam(':description', $description);
+    $req -> bindParam(':date_debut', $date_debut);
+    $req -> bindParam(':date_fin', $date_fin);
+    $req -> execute();
 
     // Redirection vers la page des promotions
-    header('Location: ../aides.php');
+    header('Location: ../aides/aides.php');
 ?>
