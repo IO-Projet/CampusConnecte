@@ -43,7 +43,7 @@
     $req = $pdo -> prepare($sql);
 
     if($recherche != '') {
-        $req -> bindValue(':rechercher', '%'. $recherche .'%');
+        $req -> bindValue(':recherche', '%'. $recherche .'%');
     }
 
     if($filtre != '') {
