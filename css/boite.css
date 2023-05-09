@@ -20,6 +20,8 @@ body .boite-accueil {
 
 .nav .btn {
     position: absolute;
+    background: transparent;
+    border-radius: 20px;
     top: 4%;
     right: 4%;
     padding: 1%;
