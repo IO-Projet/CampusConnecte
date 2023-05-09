@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 10%;
+}
+
+.nav {
+    padding: 3%;
+}
+
+body .boite-accueil {
+    background-color: aliceblue;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.nav .btn {
+    position: absolute;
+    top: 4%;
+    right: 4%;
+    padding: 1%;
+}
