@@ -41,8 +41,10 @@
         ';
     if(!empty($themes_choisis) || (isset($_GET['favoris']) && $_GET['favoris'] == 1)) {
         $query .= " WHERE ";
+
         if(!empty($themes_choisis)) {
             $query .= "matieres.nom IN (";
+
             foreach($themes_choisis as $theme) {
                 // #quote() sert à entourer la chaine de caractere de quote pour être utilisé en tant que requete SQL
                 $query .= $pdo -> quote($theme).",";

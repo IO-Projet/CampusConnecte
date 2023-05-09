@@ -55,11 +55,11 @@
             <input type="text" id="pseudo" name="pseudo" value="<?php echo $pseudo ?>" maxlength="20"><br>
 
             <label>Sexe</label><br>
-            <input type="radio" id="homme" name="sexe" value="M" <?php if ($sexe == 'M') echo 'coché' ?>>
+            <input type="radio" id="homme" name="sexe" value="M" <?php if ($sexe == 'M') echo 'checked' ?>>
             <label for="homme">Homme</label><br>
-            <input type="radio" id="femme" name="sexe" value="F" <?php if ($sexe == 'F') echo 'coché' ?>>
+            <input type="radio" id="femme" name="sexe" value="F" <?php if ($sexe == 'F') echo 'checked' ?>>
             <label for="femme">Femme</label><br>
-            <input type="radio" id="autre" name="sexe" value="A" <?php if ($sexe == 'A') echo 'coché' ?>>
+            <input type="radio" id="autre" name="sexe" value="A" <?php if ($sexe == 'A') echo 'checked' ?>>
             <label for="autre">Autre</label><br>
 
             <label for="email">Email</label>

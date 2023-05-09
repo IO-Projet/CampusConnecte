@@ -24,7 +24,7 @@
     $recherche = isset($_GET['recherche']) ? $_GET['recherche'] : '';
     $filtre = isset($_GET['filtre']) ? $_GET['filtre'] : '';
 
-    // Préparation de la requête SQL pour récupérer les annonces
+    // Préparation de la requête SQL pour récupérer toutes les annonces
     $sql = "
             SELECT annonces_promotions.*, users.pseudo 
             FROM annonces_promotions 

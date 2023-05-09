@@ -101,7 +101,7 @@
             $nav = new ClasseNavigation();
             $nav -> sendMenuPlusUn(
                 isset($user_connecte['pseudo']) ? $user_connecte['pseudo'] : $pseudo,
-                (isset($user_connecte['admin']) ? $user_connecte['admin'] : $user['admin'])
+                isset($user_connecte['admin']) ? $user_connecte['admin'] : $user['admin']
             );
         ?>
         <h1>Profil - <?php echo $pseudo; if($user['admin'] == 1) echo " [Administrateur]"; ?></h1>

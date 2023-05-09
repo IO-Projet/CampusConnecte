@@ -15,8 +15,8 @@
         $message = $_POST['message'];
 
         // Enregistrement du commentaire dans la base de données
-        $req = $pdo -> prepare('INSERT INTO profil_commentaires (user_id, expediteur, message) VALUES (:user_id, :expediteur, :message)');
-        $req -> execute([':user_id' => $user_id, ':expediteur' => $user_connecte, ':message' => $message]);
+        $req = $pdo -> prepare('INSERT INTO profil_commentaires (user_id, commentateur, message) VALUES (:user_id, :commentateur, :message)');
+        $req -> execute([':user_id' => $user_id, ':commentateur' => $user_connecte, ':message' => $message]);
 
         // Récupération du pseudo de l'utilisateur de la page
         $req = $pdo -> prepare('SELECT pseudo FROM users WHERE id = :id');

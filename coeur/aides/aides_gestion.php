@@ -89,13 +89,13 @@
     -->
     <script>
         let annonces = <?php echo json_encode($annonces); ?>;
-        if(annonces.length > 5) {
+        if(annonces.length >= 5) {
             // Le bouton n'est plus cliquable
             document.getElementById('add-button').disabled = true;
             document.getElementById('message').textContent = "Vous avez atteint la limite de 5 annonces.";
         } else {
             document.getElementById('add-button').addEventListener('click', function() {
-                    window.location.href = 'aides_ajout.php');
+                    window.location.href = 'aides_ajout.php';
             });
         }
     </script>

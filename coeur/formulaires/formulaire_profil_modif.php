@@ -53,7 +53,7 @@
 
         // Vérification du nouveau mot de passe
         if ($nouveau_mdp && (!$confirm_mdp || $nouveau_mdp != $confirm_mdp)) {
-            $errors[] = "Les mots de passe ne correspondent pas.";
+            $erreurs[] = "Les mots de passe ne correspondent pas.";
         }
 
         // Vérification du pseudo

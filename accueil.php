@@ -14,32 +14,41 @@
         <meta charset="utf-8">
         <link rel="icon" href="icones/accueil.png" type="image/png">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/boite.css">
     </head>
 
     <body>
-        <a href="inscription.php"><button>Inscription</button></a>
-        <a href="coeur/connexion.php"><button>Connexion</button></a>
+        <header>
+            <h2>Campus Connecté</h2>
+            <nav class="nav">
+                <a href="coeur/connexion.php"><button class="btn">Connexion</button></a>
+            </nav>
+        </header>
 
-        <h2>Présentation</h2>
-        <pre>Vous êtes étudiant et vous cherchez un endroit pour obtenir de l’aide pour vos devoirs, partager des informations et des offres spéciales pour les étudiants ? Ne cherchez plus, Campus Connecté est là pour vous !
+        <div class="boite-accueil">
+            <h1>🌐 - Campus Connecté</h1>
 
-Notre site, créé par des étudiants pour des étudiants, offre un espace de partage et d’entraide unique.
-Avec notre coin “aide aux devoirs”, vous pouvez demander de l’aide en postant une annonce et obtenir des réponses de la part d’autres étudiants.
-De plus, notre système d’information vous tient au courant des dernières offres et promotions spéciales pour les étudiants.
-Mais ce n’est pas tout !
+            <h2>📝 - Présentation</h2>
+            <p>Vous êtes étudiant et vous cherchez un endroit pour obtenir de l’aide pour vos devoirs,
+                partager des informations et des offres spéciales pour les étudiants ?<br>
+                Ne cherchez plus, Campus Connecté est là pour vous ! <br><br>
 
-Campus Connecté offre également d’autres options pour vous aider dans votre vie étudiante, telles que des annonces pour informer les autres utilisateurs d’une promotion spéciale étudiant.
+                Notre site, créé par des étudiants pour des étudiants, offre un espace de partage et d’entraide unique. <br>
+                Avec notre coin “aide aux devoirs”, vous pouvez demander de l’aide en postant une annonce et obtenir des réponses de la part d’autres étudiants. <br>
+                De plus, notre système d’information vous tient au courant des dernières offres et promotions spéciales pour les étudiants. <br>
+                Mais ce n’est pas tout ! <br> Campus Connecté offre également d’autres options pour vous aider dans votre vie étudiante, telles que des annonces pour informer les autres utilisateurs d’une promotion spéciale étudiant. <br><br>
 
-Rejoignez notre communauté dès maintenant et profitez de tous les avantages que Campus Connecté a à offrir !
-        </pre>
+                Rejoignez notre communauté dès maintenant et profitez de tous les avantages que Campus Connecté a à offrir !
+            </p>
 
-        <h2>Pourquoi choisir notre site ?</h2>
-        <ul>
-            <li>Créé par des étudiants pour des étudiants.</li>
-            <li>Coin “aide aux devoirs” pour demander de l’aide en postant une annonce.</li>
-            <li>Système d’information pour les offres et promotions spéciales pour les étudiants.</li>
-            <li>Possibilité pour les utilisateurs d’ajouter des annonces pour informer les autres utilisateurs d’une promotion spéciale étudiant.</li>
-            <li>Espace de partage et d’entraide unique pour les étudiants.</li>
-        </ul>
+            <h2>🤔 - Pourquoi choisir notre site ?</h2>
+            <ul>
+                <li>Créé par des étudiants pour des étudiants.</li>
+                <li>Coin “aide aux devoirs” pour demander de l’aide en postant une annonce.</li>
+                <li>Système d’information pour les offres et promotions spéciales pour les étudiants.</li>
+                <li>Possibilité pour les utilisateurs d’ajouter des annonces pour informer les autres utilisateurs d’une promotion spéciale étudiant.</li>
+                <li>Espace de partage et d’entraide unique pour les étudiants.</li>
+            </ul>
+        </div>
     </body>
 </html>
